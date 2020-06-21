@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ pageTitle }}</title>
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" type="text/css" href="./../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+        rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/80d3947a70.js"></script>
+</head>
+
+<body>
+    <main class="container">
+
+        <!--HEADER-->
+
+        <header>
+            <p class="header_text"></p>
+        </header>
+
+        <!--NAVIGATION-->
+
+        <nav>
+            <ul class="menu">
+                <li class="menu_element">
+                    <i class="fas fa-home"></i>
+                    <a href="#">Strona główna</a>
+                </li>
+                <li class="menu_element">
+                    <i class="fas fa-plus-circle"></i>
+                    <a href="#">Zarezerwuj lot</a>
+                </li>
+                <li class="menu_element menu_element-right">
+                    <a href="#" id="login_btn" class="button"><i class="fas fa-user"></i> Logowanie</a>
+                </li>
+                <li class="menu_element menu_element-right">
+                    <a href="#" id="register_btn" class="button"><i class="fas fa-user"></i> Rejestracja</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!--MAIN PART OF HOME PAGE-->
+
+        <article class="main_content">
+
+        </article>
+
+        <!--LOGIN MODAL SECTION-->
+        <div class="bg_modal" id="login_modal">
+            <div class="modal_content">
+                <i id ="login_closure_btn" class="fa fa-times-circle-o close_button" aria-hidden="true"></i>
+                <img src="./../assets/img/img_299586.png" alt="user">
+                <form action="">
+                    <input type="text" placeholder="Login">
+                    <input type="text" placeholder="Password">
+                    <a href="#" class="button">Login</a>
+                </form>
+            </div>
+        </div>
+
+        <!--REGISTRATION MODAL SECTION-->
+        <div class="bg_modal" id="registration_modal">
+            <div class="modal_content">
+                <i id ="reg_closure_btn" class="fa fa-times-circle-o close_button" aria-hidden="true"></i>
+                <img src="./../assets/img/img_299586.png" alt="user">
+                <form method="POST" action="/" enctype="application/x-www-form-urlencoded">
+                    <input type="text" name="loginValue" placeholder="Login">
+                    <input type="password" name="passValue" placeholder="Password">
+                    <input type="text" name="nameValue" placeholder="Name">
+                    <input type="text" name="surnameValue" placeholder="Surname">
+                    <input type="text" name="emailValue" placeholder="E-mail">
+                    <input type="submit" value="Register" class="button">
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!--FOOTER-->
+
+    <footer>
+        <p class="footer_text">Projekt zaliczeniowy<i class="fas fa-copyright"></i> Jadwiga Legutko SAN 2020</p>
+    </footer>
+
+    <!--SCRIPTS-->
+
+    <!-- <script src="json/index.json"></script> -->
+    <script src="./../js/functions.js"></script>
+
+</body>
+
+</html>
