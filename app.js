@@ -154,11 +154,12 @@ app.post("/reservation", (req, res) => {
                 if (err) {
                     console.log("Error");
                 } else {
+                    var air = airplane;
                     res.render('reservation', {
                         pageTitle: "Strona rezerwacji",
                         flightDate: flightDate1,
                         flightDestination: flightDestination1,
-                        airplane: airplane,
+                        air: air,
                         reservations: reservations
                     });
                 }

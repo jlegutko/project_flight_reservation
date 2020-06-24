@@ -104,5 +104,11 @@ footer {
   background-color: darkgrey;
 }
 #reservedSeats{
-  /* display:none; */
+  display:none;
+}
+.item_reserved{
+  background-color: red;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  outline: none;
 }

@@ -31,7 +31,6 @@ if(airplaneType == "local"){
     airplaneArea(airplaneBack);
 }else if(airplaneType == "continental"){
     airplaneArea(airplaneFront);
-    airplaneArea(airplaneFront);
     airplaneArea(airplaneBack);
 }else{
     airplaneArea(airplaneFront);
@@ -40,6 +39,24 @@ if(airplaneType == "local"){
     airplaneArea(airplaneBack);
 }
 
+//Reserved seats table
+var seatsTab=[];
+
+var idTab = document.querySelectorAll('.seats_id');
+
+idTab.forEach(elem => {
+    var idElem = elem.textContent.toString().split(",");
+    idElem.forEach(item =>{
+        seatsTab.push(item.toString());
+    })
+})
+
+document.querySelectorAll('.seat').forEach(item => {
+    if (seatsTab.includes(item.id)) {
+        item.classList.add("item_reserved");
+        item.classList.remove("seat");
+    }
+});
 
 //suming up the inputs with seats
 var seatSum = 0;
@@ -105,4 +122,23 @@ document.querySelectorAll('.seat').forEach(item => {
     });
 });
 
-var reservedSeats = document.getElementById("reservedSeats").textContent;
+// Creating overall of the order
+var orderDiv = document.createElement("div");
+
+
+// Pricing connected with inputs
+var adultPrice = parseInt(document.getElementById("adult_price").textContent);
+var kidPrice = parseInt(document.getElementById("kid_price").textContent);
+var babyPrice = parseInt(document.getElementById("baby_price").textContent);
+var lagguagePrice = parseInt(document.getElementById("lagguage_price").textContent);
+var seatsAmount = parseInt(getElementById("seats_amount").textContent);
+
+var adultAmount = parseInt(document.getElementById('seatsAmountAdult').value); 
+var kidAmount = parseInt(document.getElementById('seatsAmountKid').value); 
+var babyAmount = parseInt(document.getElementById('seatsAmountBaby').value);
+
+// Creating overall of the pricing
+var sampleDiv = document.createElement("div");
+document.getElementById("order_details").after(sampleDiv);
+
+sampleDiv.innerHTML = "cdccwce" + (adultPrice*adultAmount) + " " + (kidPrice*kidAmount) + " " + (babyPrice*babyAmount);

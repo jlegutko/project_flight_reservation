@@ -26,9 +26,21 @@
         </select>
         <input type="submit" value="Reserve" class="button">
     </form>
-    {{airplane}}
     <div id="reservedSeats">
-        {{reservations}}
+        <ol>
+            {{#each reservations}}  
+            <li class="seats_id">{{this.seatIds}}</li>
+            {{/each}}
+        </ol>
+    </div>
+    <div class="order_details" id="order_details">
+         <ol>
+            <li id="adult_price">{{air.seatPriceAdult}}</li>
+            <li id="kid_price">{{air.seatPriceKid}}</li>
+            <li id="baby_price">{{air.seatPriceBaby}}</li>
+            <li id="lagguage_price">{{air.lagguagePrice}}</li>
+            <li id="seats_amount">{{air.seatsAmount}}</li>
+         </ol>
     </div>
     <script src="./../js/reservation_js.js"></script>
 </body>
