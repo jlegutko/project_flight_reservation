@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./../assets/css/style.css">
+</head>
+<body>
+    <div class="airplane_area">
+        <div id="airplane_front" class="airplane_model">
+        </div>
+        <div id="airplane_back" class="airplane_model">
+        </div>
+    </div>
+
+    <form id="reserve" method="POST" action="/reservation_succed">
+        <input type="date" value="{{flightDate}}" id="flightDate" name="flightDate">
+        <input type="text" value="{{flightDestination}}" id="flightDestination" name="flightDestination">
+        <input type="number" value="0" id="seatsAmountAdult" name="seatsAmountAdult" min="0" max="9" onchange="myFunction(this.value)">
+        <input type="number" value="0" id="seatsAmountKid" name="seatsAmountKid" min="0" max="9" onchange="myFunction(this.value)">
+        <input type="number" value="0" id="seatsAmountBaby" name="seatsAmountBaby" min="0" max="9" onchange="myFunction(this.value)">
+        <select id="lagguage_type" name="lagguageType">
+            <option value="regular">Regular</option>
+            <option value="plus">Plus</option>
+        </select>
+        <input type="submit" value="Reserve" class="button">
+    </form>
+    {{airplane}}
+    <div id="reservedSeats">
+        {{reservations}}
+    </div>
+    <script src="./../js/reservation_js.js"></script>
+</body>
+
+</html>
