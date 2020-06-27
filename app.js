@@ -6,9 +6,11 @@ let Airplane = require('./models/airplane');
 let Reservation = require('./models/reservation');
 const port = process.env.PORT || 5000;
 const mongoose = require('mongoose');
-//const flash = require('connect-flash');
+const flash = require('connect-flash');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const config = require('./config/database');
+const session = require('express-session');
 var expressValidator = require('express-validator');
 const db = "mongodb+srv://admin:Student12345@flightreservationproject-r4ckv.mongodb.net/flightReservation?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
@@ -20,6 +22,22 @@ mongoose.set("useUnifiedTopology", true);
 
 // Init app
 const app = express();
+
+ // session middleware
+// Express Session Middleware
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+  }));
+app.use(require('flash')());
+ 
+app.use(function (req, res, next) {
+  // flash a message
+  req.flash('info', 'hello!');
+  next();
+})
+
 app.use(expressValidator())
 mongoose.connect(db, function (err) {
     if (err) {
@@ -27,6 +45,21 @@ mongoose.connect(db, function (err) {
     }
 });
 const path = require('path');
+
+//passport config
+require('./config/passport')(passport);
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//session if user is not null
+app.get('*', function(req, res, next){
+    res.locals.user = req.user || null;
+    next();
+  });
+  
+  
+
 
 app.use('/assets', express.static(path.join(__dirname, "./assets")));
 //podpięcie js
@@ -63,8 +96,9 @@ app.post("/", (req, res) => {
     req.checkBody('passValue_2', 'Passwords do not match').equals(req.body.passValue);
     req.checkBody('nameValue', 'Name is required').notEmpty();
     req.checkBody('surnameValue', 'Surname is required').notEmpty();
+    req.checkBody('emailValue', 'Email is required').notEmpty();
     req.checkBody('emailValue', 'Email is not valid').isEmail();
-
+ 
     let errors = req.validationErrors();
 
     if (errors) {
@@ -101,7 +135,7 @@ app.post("/", (req, res) => {
 
 //post reservation success
 app.post("/reservation_succed", (req, res) => {
-    const login = "jlegutko";
+    const login = req.user.login;
     const flightDate = req.body.flightDate;
     const flightDestination = req.body.flightDestination;
     const adultSeats = req.body.seatsAmountAdult;
@@ -141,6 +175,24 @@ app.post("/reservation_succed", (req, res) => {
     }
 });
 
+// Express Validator Middleware
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+  }));
+
 //searchTool
 
 app.post("/reservation", (req, res) => {
@@ -168,34 +220,21 @@ app.post("/reservation", (req, res) => {
     });
 });
 
-
 //post login
-app.post("/login", (req, res) => {
-    const dbname = "flight_project";
-    mongoClient.connect(url, { useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            console.log("error", err);
-        }
-        const db = client.db(dbname);
-        db.collection("users").findOne(
-            {
-                login: { $eq: inputLogin },
-                password: { $eq: inputPass }
-            },
-            (error, result) => {
-                if (error) {
-                    console.log("error when inserting", error);
-                }
-                console.log(result);
-            }
-        );
-        console.log("połączenie udane");
-    });
-    console.log(req.body);
-    res.render('index', {
-        pageTitle: "System rezerwacji lotów"
-    })
+app.post("/login", (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect:'/',
+        failureRedirect: '/',
+        failureFlash: true
+    })(req, res, next);
 });
+
+//user logout
+app.get('/logout', function(req, res){
+    req.logout();
+    req.flash('success', 'You are logged out');
+    res.redirect('/');
+  });
 
 //server
 app.listen(port, (err) => {

@@ -19,46 +19,58 @@
         <!--HEADER-->
 
         <header>
-            <p class="header_text"></p>
         </header>
 
         <!--NAVIGATION-->
 
-        <nav>
-            <ul class="menu">
-                <li class="menu_element">
-                    <i class="fas fa-home"></i>
-                    <a href="#">Strona główna</a>
-                </li>
-                <li class="menu_element">
-                    <i class="fas fa-plus-circle"></i>
-                    <a href="#">Zarezerwuj lot</a>
-                </li>
-                <li class="menu_element menu_element-right">
-                    <a id="login_btn" class="button"><i class="fas fa-user"></i> Logowanie</a>
-                </li>
-                <li class="menu_element menu_element-right">
-                    <a id="register_btn" class="button"><i class="fas fa-user"></i> Rejestracja</a>
-                </li>
+        {{!-- MAIN NAVIGATION --}}
+        <nav class="main_navigation">
+            <div class="logo_img">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                <span>FREELY</span>
+            </div>
+            <ul class="navigation">
+                <li class="navigation_element"><a href="#" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Register</li></a>
+                <li class="navigation_element"><a href="#" id="login_btn" class="nav_link"><i class="fas fa-sign-in-alt"></i>Login</li></a>
             </ul>
         </nav>
 
         <!--MAIN PART OF HOME PAGE-->
 
         <article class="main_content">
-
-        <!--SEARCH THE FLIGHTS SECTION-->
-            <div class="search_tool">
-                <form method="POST" action="/reservation" enctype="application/x-www-form-urlencoded">
-                    <input type="date" name="flightDate" id="flightDate">
-                    <select id="flight_type" name="flightDestination">
-                        <option value="local">Warsaw</option>
-                        <option value="continental">Lisbon</option>
-                        <option value="intercontinental">New York</option>
-                        <input type="submit" value="Search" class="button">
-                    </select>
-                </form>
+            <div class="wrapper">
             </div>
+        
+            <div class="section">
+                <div class="section_title">
+                    Looking for a flight?
+                </div>
+                <div class="card">
+                    <form method="POST" action="/reservation" class="grid_block search_form"
+                        enctype="application/x-www-form-urlencoded">
+                        <span class="item_header search_header"><i class="fas fa-city"></i>FROM:<span
+                                class="search_city">CRACOW</span></span>
+                        <label for="flight_type" class="item_label search_label">To: </label>
+                        <select id="flight_type" name="flightDestination" class="item_input">
+                            <option value="local">Warsaw</option>
+                            <option value="continental">Lisbon</option>
+                            <option value="intercontinental">New York</option>
+                        </select>
+                        <label for="flightDate" class="item_label search_label">Date:</label>
+                        <input type="date" name="flightDate" id="flightDate" class="item_input">
+                        <input type="submit" value="Search" class="search_btn item_header">
+                    </form>
+                    <div class="info_aside">
+        
+                    </div>
+                    <div class="footer_info">
+                        <p><i class="fas fa-info-circle"></i> You must firstly <a href="#">log in</a> to have the possibility to reserve the flight.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!--SEARCH THE FLIGHTS SECTION-->
+        
         </article>
 
         <!--LOGIN MODAL SECTION-->
@@ -69,7 +81,7 @@
                 <form method="POST" action="/login" enctype="application/x-www-form-urlencoded">
                     <input type="text" name="inputLogin" placeholder="Login">
                     <input type="password" name="inputPass" placeholder="Password">
-                    <a href="#" class="button">Login</a>
+                    <input type="submit" value="Login" class="button">
                 </form>
             </div>
         </div>
@@ -92,11 +104,10 @@
         </div>
 
     </main>
-
     <!--FOOTER-->
 
     <footer>
-        <p class="footer_text">Projekt zaliczeniowy<i class="fas fa-copyright"></i> Jadwiga Legutko SAN 2020</p>
+        <p class="footer_text">Projekt zaliczeniowy <i class="fas fa-copyright"></i> Jadwiga Legutko SAN 2020</p>
     </footer>
 
     <!--SCRIPTS-->

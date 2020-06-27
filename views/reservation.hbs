@@ -1,13 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ pageTitle }}</title>
+    <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" type="text/css" href="./../assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;1,200&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/80d3947a70.js"></script>
 </head>
+
 <body>
-    <div class="airplane_area">
+    {{!-- MAIN CONTAINER --}}
+    <main class="container">
+
+        {{!-- HEADER WITH LOGO AND WEBSITE NAME --}}
+        <header>
+            {{!-- <span class="logo_img">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+            </span>
+            <span class="site_name">
+                <p>FREELY</p>
+            </span> --}}
+        </header>
+
+        {{!-- MAIN NAVIGATION --}}
+        <nav class="main_navigation">
+            <div class="logo_img">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                <span>FREELY</span>
+            </div>
+            <ul class="navigation">
+                <li class="navigation_element"><i class="fas fa-user"></i>Register</li>
+                <li class="navigation_element"><i class="fas fa-sign-in-alt"></i>Login</li>
+            </ul>
+        </nav>
+
+        {{!-- MAIN PART OF PAGE --}}
+        <article class="main_container">
+
+            {{!-- AIRPLANE MAP TO CHOOSE THE SEAT --}}
+            
+            <div class="airplane_area">
+                <div id="airplane_front" class="airplane_model">
+                </div>
+            </div>
+
+            {{!-- RESERVATION PANEL --}}
+
+
+            <form id="reserve" method="POST" action="/reservation_succed" class="grid_block form_reservation">
+                <h3 class="item_header">Reservation panel</h3>
+                <label for="flightDate" class="item_label">Date of flight:</label>
+                <input type="date" value="{{flightDate}}" id="flightDate" name="flightDate" class="item_input" disabled>
+                <label for="flightDestinationName" class="item_label">Destination:</label>
+                <input type="text" value="{{air.destination}}" id="flightDestinationName" name="flightDestinationName"
+                    class="item_input" disabled>
+                <input type="text" value="{{flightDestination}}" id="flightDestination" name="flightDestination"
+                    class="hidden_input">
+                <h4 class="item_header">
+                    <div class="rounded_num">1</div>Choose the amount of seats
+                </h4>
+                <label for="seatsAmountAdult" class="item_label">Adults:</label>
+                <input type="number" value="0" id="seatsAmountAdult" name="seatsAmountAdult" min="0" max="9"
+                    onchange="myFunction(this.value)" class="item_input">
+                <label for="seatsAmountKid" class="item_label">Kids:</label>
+                <input type="number" value="0" id="seatsAmountKid" name="seatsAmountKid" min="0" max="9"
+                    onchange="myFunction(this.value)" class="item_input">
+                <label for="seatsAmountBaby" class="item_label">Babies:</label>
+                <input type="number" value="0" id="seatsAmountBaby" name="seatsAmountBaby" min="0" max="9"
+                    onchange="myFunction(this.value)" class="item_input">
+                <h4 class="item_header"><span class="rounded_num">2</span>Choose the luggage option</h4>
+                <input type="button" value="Regular" id="regular" name="lagguage_type"
+                    class="item_label btn_lagguage">{{!--<i class="fas fa-suitcase"></i>--}}
+                <input type="button" value="Plus" id="plus" name="lagguage_type"
+                    class="item_input btn_lagguage">{{!--<i class="fas fa-luggage-cart"></i>  --}}
+                <h4 class="item_header"><span class="rounded_num">3</span>Choose the seats on the map</h4>
+                <button type="button" class="link link--arrowed item_header hidden_input"  onclick="showOrderDetails()" id="order">
+                    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                        viewBox="0 0 32 32">
+                        <g fill="none" stroke="#2175FF" stroke-width="1.5" stroke-linejoin="round"
+                            stroke-miterlimit="10">
+                            <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                            <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                        </g>
+                    </svg>
+                </button>
+                <div class="hidden_input" id="order_details">
+                    <ol>
+                        <li id="adult_price">{{air.seatPriceAdult}}</li>
+                        <li id="kid_price">{{air.seatPriceKid}}</li>
+                        <li id="baby_price">{{air.seatPriceBaby}}</li>
+                        <li id="lagguage_price">{{air.lagguagePrice}}</li>
+                        <li id="seats_amount">{{air.seatsAmount}}</li>
+                    </ol>
+                </div>
+                <h4 class="item_header hidden_input" id="order_header"><span class="rounded_num">4</span>Order summary</h4>
+                <div class="item_input">
+
+                </div>
+                <div class="item_label">
+                    <span>Date of flight:</span>
+                </div>
+                <div class="item_input">
+                    <span>Destination:</span>
+                </div>
+                <div class="item_label">
+                    <span>Seats:</span>
+                </div>
+                <div class="item_input" id="lagguage_option">
+                    <span>Lagguage option:</span>
+                </div>
+                <input type="submit" value="Order" class="item_header hidden_input">
+            </form>
+        </article>
+    </main>
+
+    {{!-- FOOTER --}}
+    <footer>
+
+    </footer>
+
+
+
+    {{!-- <div class="airplane_area">
         <div id="airplane_front" class="airplane_model">
         </div>
         <div id="airplane_back" class="airplane_model">
@@ -33,15 +153,7 @@
             {{/each}}
         </ol>
     </div>
-    <div class="order_details" id="order_details">
-         <ol>
-            <li id="adult_price">{{air.seatPriceAdult}}</li>
-            <li id="kid_price">{{air.seatPriceKid}}</li>
-            <li id="baby_price">{{air.seatPriceBaby}}</li>
-            <li id="lagguage_price">{{air.lagguagePrice}}</li>
-            <li id="seats_amount">{{air.seatsAmount}}</li>
-         </ol>
-    </div>
+    --}}
     <script src="./../js/reservation_js.js"></script>
 </body>
 
