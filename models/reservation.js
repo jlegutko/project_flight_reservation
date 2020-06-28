@@ -6,11 +6,11 @@ const reservationSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    flightDestination: {
+    flightDate: {
         type: String,
         required: true
     },
-    flightDate: {
+    flightDestination: {
         type: String,
         required: true
     },
@@ -26,9 +26,6 @@ const reservationSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    luggage: {
-        type: String,
-        required: true},
     seatIds: {
         type: String,
         required: true

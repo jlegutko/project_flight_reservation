@@ -2,82 +2,94 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+// Load User model
+const User = require('../models/User');
+const { forwardAuthenticated } = require('../config/auth');
 
+// Login Page
+router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
-router.get('/', function (req, res) {
-    const sample = () => {
-        return 'proba'
-    }
-    res.render('index', {
-        pageTitle: "System rezerwacji lotów"
+// Register Page
+router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+
+// Register
+router.post('/register', (req, res) => {
+  const { username, email, password, password2 } = req.body;
+  let errors = [];
+
+  if (!username || !email || !password || !password2) {
+    errors.push({ msg: 'Please enter all fields' });
+  }
+
+  if (password != password2) {
+    errors.push({ msg: 'Passwords do not match' });
+  }
+
+  if (password.length < 6) {
+    errors.push({ msg: 'Password must be at least 6 characters' });
+  }
+
+  if (errors.length > 0) {
+    res.render('register', {
+      errors,
+      username,
+      email,
+      password,
+      password2
     });
-});
-//Registration proccess
-router.post("/", (req, res) => {
-    const login = req.body.loginValue;
-    const password = req.body.passValue;
-    const password_2 = req.body.passValue_2;
-    const name = req.body.nameValue;
-    const surname = req.body.surnameValue;
-    const email = req.body.emailValue;
-
-    //validation
-    req.checkBody('loginValue', 'Login is required').notEmpty();
-    req.checkBody('passValue', 'Password is required').notEmpty();
-    req.checkBody('passValue_2', 'Passwords do not match').equals(req.body.passValue);
-    req.checkBody('nameValue', 'Name is required').notEmpty();
-    req.checkBody('surnameValue', 'Surname is required').notEmpty();
-    req.checkBody('emailValue', 'Email is not valid').isEmail();
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        res.render('index', {
-            errors: errors
+  } else {
+    User.findOne({ email: email }).then(user => {
+      if (user) {
+        errors.push({ msg: 'Email already exists' });
+        res.render('register', {
+          errors,
+          username,
+          email,
+          password,
+          password2
         });
-    } else {
-        let newUser = new User({
-            login: login,
-            password: password,
-            name: name,
-            surname: surname,
-            email: email
+      } else {
+        const newUser = new User({
+          username,
+          email,
+          password
         });
 
-        bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(newUser.password, salt, function (err, hash) {
-                if (err) {
-                    console.log(err);
-                }
-                newUser.password = hash;
-                newUser.save(function (err) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    } else {
-                        req.flash('success', 'You are now registered and can log in');
-                        res.redirect('index');
-                    }
-                });
-            });
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(user => {
+                req.flash(
+                  'success_msg',
+                  'You are now registered and can log in'
+                );
+                res.redirect('/users/login');
+              })
+              .catch(err => console.log(err));
+          });
         });
-    }
+      }
+    });
+  }
 });
 
-// Login Process
-router.post('/login', function(req, res, next){
-    passport.authenticate('local', {
-      successRedirect:'/',
-      failureRedirect:'index',
-      failureFlash: true
-    })(req, res, next);
-  });
-  
-  // logout
-  router.get('/logout', function(req, res){
-    req.logout();
-    req.flash('success', 'You are logged out');
-    res.redirect('index');
-  });
-  
-  module.exports = router;
+// Login
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+    failureFlash: true
+  })(req, res, next);
+});
+
+// Logout
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/users/login');
+});
+
+module.exports = router;

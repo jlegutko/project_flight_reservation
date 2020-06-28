@@ -1,23 +1,23 @@
-// Login pop up TODO: zastapic funkcja
+// // Login pop up TODO: zastapic funkcja
 
-document.getElementById('login_btn').addEventListener('click', function(){
-    document.querySelector("#login_modal").style.display="flex";
-});
+// document.getElementById('login_btn').addEventListener('click', function(){
+//     document.querySelector("#login_modal").style.display="flex";
+// });
 
-document.getElementById('login_closure_btn').addEventListener('click', function(){
-    document.querySelector("#login_modal").style.display="none";
-});
+// document.getElementById('login_closure_btn').addEventListener('click', function(){
+//     document.querySelector("#login_modal").style.display="none";
+// });
 
 
-// Register pop up
+// // Register pop up
 
-document.getElementById('register_btn').addEventListener('click', function(){
-    document.querySelector("#registration_modal").style.display="flex";
-});
+// document.getElementById('register_btn').addEventListener('click', function(){
+//     document.querySelector("#registration_modal").style.display="flex";
+// });
 
-document.getElementById('reg_closure_btn').addEventListener('click', function(){
-    document.querySelector("#registration_modal").style.display="none";
-});
+// document.getElementById('reg_closure_btn').addEventListener('click', function(){
+//     document.querySelector("#registration_modal").style.display="none";
+// });
 
 // Today's date checker and adding min to input
 var today = new Date();
@@ -28,6 +28,7 @@ var yyyy = today.getFullYear();
 
 today = yyyy + '-' + mm + '-' + dd;
 dateInput.min = today; 
+dateInput.value = today;
 
 // One year limit checker and adding max to input
 var max_date = yyyy + 1 + '-' + mm + '-' + dd; 

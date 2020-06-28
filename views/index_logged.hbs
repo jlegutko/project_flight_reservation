@@ -31,7 +31,7 @@
             </div>
             <ul class="navigation">
                 {{#if user}}
-                    <li class="navigation_element"><a href="/users/register" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Logout</li></a>
+                    <li class="navigation_element"><a href="/users/logout" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Logout</li></a>
                 {{else}}
                     <li class="navigation_element"><a href="/users/register" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Register</li></a>
                     <li class="navigation_element"><a href="/users/login" id="login_btn" class="nav_link"><i class="fas fa-sign-in-alt"></i>Login</li></a>
@@ -65,10 +65,10 @@
                         <input type="submit" value="Search" class="search_btn item_header">
                     </form>
                     <div class="info_aside">
-                        <p>Before using the search tool, you must log in.<br> You don't have an account yet? Register here.</p>
+        
                     </div>
                     <div class="footer_info">
-                        <p><i class="fas fa-info-circle"></i> You must firstly <a href="/users/login">log in</a> to have the possibility to reserve the flight.</p>
+                        <p><i class="fas fa-info-circle"></i> You must firstly <a href="#">log in</a> to have the possibility to reserve the flight.</p>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
     <!--FOOTER-->
 
     <footer>
-        <p class="footer_text">Freely <i class="far fa-copyright"></i> SAN 2020</p>
+        <p class="footer_text">Projekt zaliczeniowy <i class="fas fa-copyright"></i> Jadwiga Legutko SAN 2020</p>
     </footer>
 
     <!--SCRIPTS-->
