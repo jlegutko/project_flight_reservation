@@ -71,7 +71,7 @@
                 <label for="seatsAmountBaby" class="item_label label_normalization">Babies:</label>
                 <input type="number" value="0" id="seatsAmountBaby" name="seatsAmountBaby" min="0" max="9"
                     onchange="myFunction(this.value)" class="item_input input_normalization">
-                <h4 class="item_header"><div class="rounded_num">2</div>Choose the luggage option</h4>
+                <h4 class="item_header"><div class="rounded_num">2</div>Choose the lagguage option</h4>
                 <div class="item_label lagguage_container" id="option_reg">
                     <i class="fas fa-suitcase"></i><p> + 0$</p>
                 </div>
@@ -80,9 +80,9 @@
                 </div>
                 <input type="button" id="lagguage_regular" value="regular" class="item_label btn_lagguage">
                 <input type="button" id="lagguage_plus" value="plus" class="item_input btn_lagguage">
-                <h4 class="item_header"><div class="rounded_num">3</div>Choose the seats on the map<i class="fas fa-check i_correct"></i></h4>
-                <button type="button" class="link link--arrowed item_header hidden_input btn_arrow" onclick="showOrderDetails()"
-                    id="order">
+                <h4 class="item_header"><div class="rounded_num">3</div>Choose the seats on the map<i id="correct_selection" class="i_correct hidden_input"></i></h4>
+                <button type="button" class="item_header btn_arrow link link--arrowed" onclick="showOrderDetails()"
+                    id="order_arrow">
                     <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 32 32">
                         <g fill="none" stroke="#2175FF" stroke-width="1.5" stroke-linejoin="round"
                             stroke-miterlimit="10">
@@ -102,25 +102,22 @@
                 </div>
                 <h4 class="item_header hidden_input" id="order_header"><div class="rounded_num">4</div>Order summary
                 </h4>
-                <div class="item_input">
-
+                <div class="item_label hidden_input">
+                    <span><i class="far fa-calendar-alt"></i> Date of flight: {{flightDate}}</span>
                 </div>
-                <div class="item_label">
-                    <span>Date of flight: {{flightDate}}</span>
+                <div class="item_input hidden_input">
+                    <span><i class="fas fa-plane-arrival"></i> Destination: {{air.destination}}</span>
                 </div>
-                <div class="item_input">
-                    <span>Destination: {{air.destination}}</span>
+                <div class="item_label hidden_input">
+                    <span><i class="fas fa-chair"></i> Seats:</span>
                 </div>
-                <div class="item_label">
-                    <span>Seats:</span>
+                <div class="item_input hidden_input" id="lagguage_option">
+                    <span id="lagguage_span"><i class="fas fa-suitcase-rolling"></i> Lagguage option: </span>
                 </div>
-                <div class="item_input" id="lagguage_option">
-                    <span id="lagguage_span"></span>
+                <div class="item_header hidden_input">
+                    <span id="overall_price"><i class="fas fa-dollar-sign"></i> Price: </span>
                 </div>
-                <div class="item_header">
-                    <span id="overall_price">Price: </span>
-                </div>
-                <input type="submit" value="Order" class="item_header hidden_input">
+                <input type="submit" value="Order" class="item_header hidden_input order_btn" disabled>
             </form>
             <div id="reservedSeats" class="hidden_input">
                 <ol>

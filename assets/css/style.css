@@ -191,11 +191,12 @@ h3, h4{
   min-height: 100%;
   background-color: rgb(187, 223, 238);
   border-radius: 5%;
-  grid-template-rows: repeat(15, 5%);
+  grid-template-rows: repeat(16, 5%);
 }
 .item_header{
   grid-column-start: 1;
   grid-column-end: col2-end;
+  place-self: center stretch;
 }
 .item_label{
   grid-column-start: 1;
@@ -505,6 +506,45 @@ textarea:focus, input:focus{
   color: green;
   font-size: 1.5rem;
 }
+.order_btn{
+  padding: 1rem;
+  cursor: pointer;
+  width: 70%;
+  align-self: center;
+  justify-self: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: rgb(7, 89, 100);
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+.search_btn{
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 2rem;
+  align-self: center;
+  justify-self: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: rgb(102, 200, 245);
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+.search_btn:hover{
+  background-color: rgb(7, 89, 100);
+}
+.order_btn:disabled{
+  color: darkgrey;
+  cursor: default;
+}
+.order_btn:hover{
+
+}
 
 
 @media only screen and (max-width: 758px) {
@@ -513,3 +553,5 @@ textarea:focus, input:focus{
   }
 }
 
+/* Import the rest of Bulma*/
+@import "../../node_modules/bulma";

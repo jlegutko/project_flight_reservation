@@ -44,6 +44,7 @@ function airplaneAreaLocal(airplane, amount, letters){
     }
 }
 
+
 var localLetters = ['A','B','C','D'];
 var continentalLetters = ['A','B','C','D','E','F'];
 var intercontinentalLetters = ['A','B','C','D','E','F','G','H'];
@@ -90,9 +91,6 @@ document.querySelectorAll('.seat').forEach(item => {
     }
 });
 // Pricing connected with inputs
-var adultPrice = parseInt(document.getElementById("adult_price").textContent);
-var kidPrice = parseInt(document.getElementById("kid_price").textContent);
-var babyPrice = parseInt(document.getElementById("baby_price").textContent);
 var lagguagePrice = parseInt(document.getElementById("lagguage_price").textContent);
 var seatsAmount = parseInt(document.getElementById("seats_amount").textContent);
 
@@ -104,11 +102,15 @@ var seatSum = 0;
 var lagguage_flag = 0;
 //eventListener for buttons with lagguage type - lagguage plus
 var lagguagePlus = document.getElementById("lagguage_plus");
+// append lagguage option to order details
+var lagguaggeSpan = document.getElementById('lagguage_span');
+
 lagguagePlus.addEventListener("click",function(){
     lagguagePlus.classList.add("clicked_lagguage");
     document.getElementById("option_plus").classList.add("choosen_option");
     document.getElementById("option_reg").classList.remove("choosen_option");
     document.getElementById("lagguage_regular").classList.remove("clicked_lagguage");
+    lagguaggeSpan.innerHTML = '<i class="fas fa-suitcase-rolling"></i> Lagguage option: plus';
     lagguage_flag = 1;
  });
 //eventListener for buttons with lagguage type - lagguage regular
@@ -118,10 +120,28 @@ lagguageRegular.addEventListener("click",function(){
    document.getElementById("option_reg").classList.add("choosen_option");
    document.getElementById("option_plus").classList.remove("choosen_option");
    document.getElementById("lagguage_plus").classList.remove("clicked_lagguage");
+   lagguaggeSpan.innerHTML = '<i class="fas fa-suitcase-rolling"></i> Lagguage option: regular';
    lagguage_flag = 1;
 });
 
 var selectedSeats=[];
+var priceTable = [];
+var adultPrice = 0;
+var kidPrice = 0;
+var overallPrice = 0;
+var babyPrice = 0;
+
+document.getElementById('seatsAmountAdult').addEventListener("change",function(){
+    adultPrice = parseInt(document.getElementById("adult_price").textContent) * parseInt(document.getElementById('seatsAmountAdult').value);
+});
+document.getElementById('seatsAmountKid').addEventListener("change",function(){
+    kidPrice = parseInt(document.getElementById("kid_price").textContent) * parseInt(document.getElementById('seatsAmountKid').value)
+});
+document.getElementById('seatsAmountBaby').addEventListener("change",function(){
+    babyPrice = parseInt(document.getElementById("baby_price").textContent) * parseInt(document.getElementById('seatsAmountBaby').value);
+});
+
+
 
 function myFunction(val) {
     console.log(val);
@@ -130,14 +150,11 @@ function myFunction(val) {
     + parseInt(document.getElementById('seatsAmountBaby').value);
     // Creating overall of the pricing
 
-    var priceSpan = document.getElementById("overall_price");
-    overallPrice = parseInt(document.getElementById("adult_price").textContent) * parseInt(document.getElementById('seatsAmountAdult').value) + (kidPrice * kidAmount) + (babyPrice * babyAmount);
-    priceSpan.textContent = overallPrice;
-
     if (seatSum > 9){
         console.log("nieeeee");
     }
 }
+
 
 //adding Event listener to each seat and counting how many seats selected, if 9 break
 
@@ -192,33 +209,44 @@ document.querySelectorAll('.seat').forEach(item => {
         input.value = selectedSeats;
     });
 });
-var lagguageSpan = document.getElementById("lagguage_span");
 
-document.querySelectorAll('.seat').forEach(item => {
-    item.addEventListener('click', event => {
-        if (selectedSeats.length == seatSum) {
-            //button appears when all form is filled and seats are marked
-            lagguageRegular.addEventListener("click", function () {
-                if (lagguageRegular.name == "regular") {
-                    lagguageSpan.innerHTML = "Lagguage option: regular" 
-                }
-            });
-            lagguagePlus.addEventListener("click", function () {
-                if (lagguagePlus.name == "plus") {
-                    lagguageSpan.innerHTML = "Lagguage option: plus" 
-                }
-            });
-        } else {
-            document.getElementById("order").classList.add("hidden_input");
-        }
-    });
-});
 
 // Creating overall of the order
 var orderDiv = document.createElement("div");
 
 //after button appear, clicking to see order details
 function showOrderDetails() {
-    var orderHeader = document.getElementById('order_header');
-    orderHeader.classList.remove("hidden_input");
+    document.querySelectorAll('.item_header').forEach(item => {
+        if(item.classList.contains("hidden_input")){
+            item.classList.remove("hidden_input");
+        }
+    });
+    document.querySelectorAll('.item_label').forEach(item => {
+        if(item.classList.contains("hidden_input")){
+            item.classList.remove("hidden_input");
+        }
+    });
+    document.querySelectorAll('.item_input').forEach(item => {
+        if(item.classList.contains("hidden_input")){
+            item.classList.remove("hidden_input");
+        }
+    });
 }
+
+// appearing of correct selection
+
+document.querySelectorAll('.seat').forEach(item => {
+    item.addEventListener('click', event => {
+        if (selectedSeats.length == seatSum) {
+            document.getElementById('correct_selection').classList.add("fas");
+            document.getElementById('correct_selection').classList.add("fa-check");
+            document.getElementById('correct_selection').classList.remove("hidden_input");
+        } else {
+            document.getElementById('correct_selection').classList.add("hidden_input");
+            document.getElementById('correct_selection').classList.remove("fas");
+            document.getElementById('correct_selection').classList. remove("fa-check");
+        }
+    });
+});
+
+

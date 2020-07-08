@@ -49,6 +49,8 @@ app.use(flash());
 app.use('/assets', express.static(path.join(__dirname, "./assets")));
 //podpięcie js
 app.use('/js', express.static(path.join(__dirname, "./js")));
+//podpięcie bulmy
+app.use('/mybulma', express.static(path.join(__dirname, "./mybulma")));
 
 // Global variables
 app.use(function(req, res, next) {
