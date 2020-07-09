@@ -209,12 +209,6 @@ h3, h4{
   /* grid-column-end: col2-end; */
 }
 
-.logo_img i { 
-  transform: rotate(-45deg); 
-  padding: 1.5rem;
-  color: skyblue;
-  font-size: 2rem;
-}
 header{
   display: flex;
   flex-direction: row;
@@ -545,8 +539,64 @@ textarea:focus, input:focus{
 .order_btn:hover{
 
 }
+/* new styless */
 
-
+.homepage-hero .layer{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+.layer-01{
+  z-index: 1001;
+  background-image: url("../img/airplane_background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.layer-02{
+  z-index: 1002;
+}
+.layer-03{
+  z-index: 1003;
+  background: url("../img/clouds.png") bottom;
+}
+.navbar.is-top{
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20000;
+}
+.is-link{
+  padding: 25px 25px;
+}
+.homepage-hero h1{
+  padding-top: 22vh;
+  color: rgb(4, 129, 163);
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 48px;
+}
+.homepage-hero p{
+  color: rgb(4, 129, 163);
+  font-size: 18px;
+}
+.logo-desc{
+  font-weight: 600;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: rgb(88, 203, 231);
+}
+.logo_img{ 
+  transform: rotate(-45deg); 
+  color: rgb(88, 203, 231);
+  font-size: 22px;
+}
+.text-link{
+  text-decoration: underline !important;
+  font-weight: 600;
+}
 @media only screen and (max-width: 758px) {
   h4 {
     /* font-size: 0.5rem; */

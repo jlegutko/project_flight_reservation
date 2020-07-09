@@ -14,174 +14,46 @@
     <script src="https://kit.fontawesome.com/80d3947a70.js"></script>
 </head>
 
-<body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
-    
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-    
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item">
-                    Home
+<body data-module="scroll">
+    <nav class="navbar is-top">
+        <div class="container is-small">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                    <i class="fa fa-plane logo_img" aria-hidden="true"></i>
+                    <span class="has-text-weight-strong logo-desc"> &nbsp;FREELY</span>
                 </a>
-    
-                <a class="navbar-item">
-                    Documentation
-                </a>
-    
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        More
-                    </a>
-    
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            About
-                        </a>
-                        <a class="navbar-item">
-                            Jobs
-                        </a>
-                        <a class="navbar-item">
-                            Contact
-                        </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item">
-                            Report an issue
-                        </a>
-                    </div>
+                <div role="button" tabindex="0" class="navbar-burger burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
-    
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-light">
-                            Log in
-                        </a>
-                    </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="/users/login" class="navbar-item">Sign in</a>
+                    <a href="/users/register" class="navbar-item">Sign up</a>
                 </div>
             </div>
         </div>
     </nav>
-    {{!-- <main class="container">
-
-        <!--HEADER-->
-
-        <header>
-        </header>
-
-        <!--NAVIGATION-->
-        
-
-        {{!-- MAIN NAVIGATION --}}
-        <nav class="main_navigation">
-            <div class="logo_img">
-                <i class="fa fa-plane" aria-hidden="true"></i>
-                <span>FREELY</span>
+    <section class="homepage-hero" data-module="parallax">
+        <div class="layer layer-01"></div>
+        <div class="layer layer-02">
+        </div>
+        <div class="layer layer-03">
+             <div class="is-12 is-vertical has-text-centered">
+                <h1 class="title">
+                    Welcome on FREELY!
+                </h1>
+                <p>
+                    If you want to reserve a flight on our website, please firstly <a href="/users/login" class="text-link">log in</a> to your account. 
+                </p>
+                <p>Don't have an account yet? <a href="/users/register" class="text-link">Register</a> for free.</p>
             </div>
-            <ul class="navigation">
-                {{#if user}}
-                    <li class="navigation_element"><a href="/users/register" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Logout</li></a>
-                {{else}}
-                    <li class="navigation_element"><a href="/users/register" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Register</li></a>
-                    <li class="navigation_element"><a href="/users/login" id="login_btn" class="nav_link"><i class="fas fa-sign-in-alt"></i>Login</li></a>
-                {{/if}}
-            </ul>
-        </nav>
+        </div>
 
-        <!--MAIN PART OF HOME PAGE-->
-
-        <article class="main_content">
-            <div class="wrapper">
-            </div>
-        
-            <div class="section">
-                <div class="section_title">
-                    Looking for a flight?
-                </div>
-                <div class="card">
-                    <form method="POST" action="/reservation" class="grid_block search_form"
-                        enctype="application/x-www-form-urlencoded">
-                        <span class="item_header search_header"><i class="fas fa-city"></i>FROM:<span
-                                class="search_city">CRACOW</span></span>
-                        <label for="flight_type" class="item_label search_label label_normalization">To: </label>
-                        <select id="flight_type" name="flightDestination" class="item_input">
-                            <option value="local">Warsaw</option>
-                            <option value="continental">Lisbon</option>
-                            <option value="intercontinental">New York</option>
-                        </select>
-                        <label for="flightDate" class="item_label search_label label_normalization">Date:</label>
-                        <input type="date" name="flightDate" id="flightDate" class="item_input">
-                        <input type="submit" value="Search" class="search_btn item_header search_btn">
-                    </form>
-                    <div class="info_aside">
-                        <p>Before using the search tool, you must log in.<br> You don't have an account yet? Register here.</p>
-                    </div>
-                    <div class="footer_info">
-                        <p><i class="fas fa-info-circle"></i> You must firstly <a href="/users/login">log in</a> to have the possibility to reserve the flight.</p>
-                    </div>
-                </div>
-            </div>
-        
-            <!--SEARCH THE FLIGHTS SECTION-->
-        
-        </article>
-
-        <!--LOGIN MODAL SECTION-->
-        {{!-- <div class="bg_modal" id="login_modal">
-            <div class="modal_content">
-                <i id ="login_closure_btn" class="fa fa-times-circle-o close_button" aria-hidden="true"></i>
-                <img src="./../assets/img/img_299586.png" alt="user">
-                <form method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
-                    <input type="text" name="inputLogin" placeholder="Login">
-                    <input type="password" name="inputPass" placeholder="Password">
-                    <input type="submit" value="Login" class="button">
-                </form>
-            </div>
-        </div> --}}
-
-        <!--REGISTRATION MODAL SECTION-->
-        {{!-- <div class="bg_modal" id="registration_modal">
-            <div class="modal_content">
-                <i id ="reg_closure_btn" class="fa fa-times-circle-o close_button" aria-hidden="true"></i>
-                <img src="./../assets/img/img_299586.png" alt="user">
-                <form method="POST" action="/users/register" enctype="application/x-www-form-urlencoded">
-                    <input type="text" name="loginValue" placeholder="Login">
-                    <input type="password" name="passValue" placeholder="Password">
-                    <input type="password" name="passValue_2" placeholder="Password">
-                    <input type="text" name="nameValue" placeholder="Name">
-                    <input type="text" name="surnameValue" placeholder="Surname">
-                    <input type="text" name="emailValue" placeholder="E-mail">
-                    <input type="submit" value="Register" class="button">
-                </form>
-            </div>
-        </div> --}}
-
-    </main>
-    <!--FOOTER-->
-
-    <footer>
-        <p class="footer_text">Freely <i class="far fa-copyright"></i> SAN 2020</p>
-    </footer>
-
-    <!--SCRIPTS-->
-
-    <!-- <script src="json/index.json"></script> -->
-    <script src="./../js/functions.js"></script> --}}
-
+    </section>
+   
 </body>
 
 </html>
