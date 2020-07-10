@@ -8,115 +8,98 @@
     <title>{{ pageTitle }}</title>
     <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" type="text/css" href="./../assets/css/style.css">
+    <link rel="stylesheet" href="./../mybulma/css/mystyles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
         rel="stylesheet" />
     <script src="https://kit.fontawesome.com/80d3947a70.js"></script>
 </head>
 
-<body>
-    <main class="container">
-
-        <!--HEADER-->
-
-        <header>
-        </header>
-
-        <!--NAVIGATION-->
-
-        {{!-- MAIN NAVIGATION --}}
-        <nav class="main_navigation">
-            <div class="logo_img">
-                <i class="fa fa-plane logo_img" aria-hidden="true"></i>
-                <span>FREELY</span>
+<body data-module="scroll">
+    <nav class="navbar is-top">
+        <div class="container is-small">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                    <i class="fa fa-plane logo_img" aria-hidden="true"></i>
+                    <span class="has-text-weight-strong logo-desc"> &nbsp;FREELY</span>
+                </a>
+                <div role="button" tabindex="0" class="navbar-burger burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
-            <ul class="navigation">
-                {{#if user}}
-                    <li class="navigation_element"><a href="/users/logout" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Logout</li></a>
-                {{else}}
-                    <li class="navigation_element"><a href="/users/register" id="register_btn" class="nav_link"><i class="fas fa-user"></i>Register</li></a>
-                    <li class="navigation_element"><a href="/users/login" id="login_btn" class="nav_link"><i class="fas fa-sign-in-alt"></i>Login</li></a>
-                {{/if}}
-            </ul>
-        </nav>
-
-        <!--MAIN PART OF HOME PAGE-->
-
-        <article class="main_content">
-            <div class="wrapper">
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="/users/logout" class="navbar-item">Log out</a>
+                </div>
             </div>
-        
-            <div class="section">
-                <div class="section_title">
+        </div>
+    </nav>
+    <section class="homepage-hero" data-module="parallax">
+        <div class="layer layer-01"></div>
+        <div class="layer layer-02">
+        </div>
+        <div class="layer layer-03">
+            <div class="is-12 is-vertical has-text-centered">
+                <h1 class="title">
                     Looking for a flight?
-                </div>
-                <div class="card">
-                    <form method="POST" action="/reservation" class="grid_block search_form"
-                        enctype="application/x-www-form-urlencoded">
-                        <span class="item_header search_header"><i class="fas fa-city"></i>FROM:<span
-                                class="search_city">CRACOW</span></span>
-                        <label for="flight_type" class="item_label search_label">To: </label>
-                        <select id="flight_type" name="flightDestination" class="item_input">
-                            <option value="local">Warsaw</option>
-                            <option value="continental">Lisbon</option>
-                            <option value="intercontinental">New York</option>
-                        </select>
-                        <label for="flightDate" class="item_label search_label">Date:</label>
-                        <input type="date" name="flightDate" id="flightDate" class="item_input">
-                        <input type="submit" value="Search" class="search_btn item_header">
-                    </form>
-                    <div class="info_aside">
-        
+                </h1>
+                <p class="is-padding">
+                    Use our search tool below
+                </p>
+            </div>
+
+            <div class="pro-wrap">
+                <div class="pro-body-1">
+                    <div class="pro-container">
+                        <div class="pro-card is-active is-transparent">
+                            <div class="pro-form">
+                                <form method="POST" action="/reservation" enctype="application/x-www-form-urlencoded">
+                                    <div class="field">
+                                        <h2 class="title is-3 is-bold has-text-centered"><i
+                                                class="fas fa-city"></i>&nbsp;&nbsp;From: Cracow</h2>
+                                    </div>
+                                    <div class="columns is-positioned">
+                                        <div class="field column is-half">
+                                            <label for="flight_type" class="label">To:</label>
+                                            <div class="field">
+                                                <div class="control has-icons-left">
+                                                    <div class="select is-info is-medium">
+                                                        <select id="flight_type" name="flightDestination">
+                                                            <option value="local">Warsaw</option>
+                                                            <option value="continental">Lisbon</option>
+                                                            <option value="intercontinental">New York</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="icon is-small is-left">
+                                                        <i class="fas fa-globe"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field column is-half">
+                                            <label for=for="flightDate" class="label">Date:</label>
+                                            <div class="control">
+                                                <input type="date" class="is-normalize" name="flightDate" id="flightDate" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field is-center">
+                                        <div class="control">
+                                            <input type="submit" value="Search" class="search_btn item_header">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="footer_info">
-                        <p><i class="fas fa-info-circle"></i> You must firstly <a href="#">log in</a> to have the possibility to reserve the flight.</p>
-                    </div>
                 </div>
             </div>
-        
-            <!--SEARCH THE FLIGHTS SECTION-->
-        
-        </article>
 
-        <!--LOGIN MODAL SECTION-->
-        {{!-- <div class="bg_modal" id="login_modal">
-            <div class="modal_content">
-                <i id ="login_closure_btn" class="fa fa-times-circle-o close_button" aria-hidden="true"></i>
-                <img src="./../assets/img/img_299586.png" alt="user">
-                <form method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
-                    <input type="text" name="inputLogin" placeholder="Login">
-                    <input type="password" name="inputPass" placeholder="Password">
-                    <input type="submit" value="Login" class="button">
-                </form>
-            </div>
-        </div> --}}
 
-        <!--REGISTRATION MODAL SECTION-->
-        {{!-- <div class="bg_modal" id="registration_modal">
-            <div class="modal_content">
-                <i id ="reg_closure_btn" class="fa fa-times-circle-o close_button" aria-hidden="true"></i>
-                <img src="./../assets/img/img_299586.png" alt="user">
-                <form method="POST" action="/users/register" enctype="application/x-www-form-urlencoded">
-                    <input type="text" name="loginValue" placeholder="Login">
-                    <input type="password" name="passValue" placeholder="Password">
-                    <input type="password" name="passValue_2" placeholder="Password">
-                    <input type="text" name="nameValue" placeholder="Name">
-                    <input type="text" name="surnameValue" placeholder="Surname">
-                    <input type="text" name="emailValue" placeholder="E-mail">
-                    <input type="submit" value="Register" class="button">
-                </form>
-            </div>
-        </div> --}}
 
-    </main>
-    <!--FOOTER-->
+    </section>
 
-    <footer>
-        <p class="footer_text">Projekt zaliczeniowy <i class="fas fa-copyright"></i> Jadwiga Legutko SAN 2020</p>
-    </footer>
-
-    <!--SCRIPTS-->
-
-    <!-- <script src="json/index.json"></script> -->
     <script src="./../js/functions.js"></script>
 
 </body>
