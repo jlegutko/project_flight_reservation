@@ -1,19 +1,113 @@
-<form action="/users/register" method="POST">
-  <div>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="username" required>
-  </div>
-  <div>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-    <div>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password2" required>
-  </div>
-  <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ pageTitle }}</title>
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" type="text/css" href="./../assets/css/style.css">
+  <link rel="stylesheet" href="./../mybulma/css/mystyles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+    rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/80d3947a70.js"></script>
+</head>
+
+<body class="pro-body">
+  {{!-- NAVIGATION --}}
+  <nav class="navbar is-top">
+    <div class="container is-small">
+      <div class="navbar-brand">
+        <a href="/" class="navbar-item">
+          <i class="fa fa-plane logo_img" aria-hidden="true"></i>
+          <span class="has-text-weight-strong logo-desc"> &nbsp;FREELY</span>
+        </a>
+        <div role="button" tabindex="0" class="navbar-burger burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <a href="/users/login" class="navbar-item">Sign in</a>
+          <a href="/users/register" class="navbar-item">Sign up</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  {{!-- END OF NAVIGATION --}}
+  <main>
+    <div class="hero is-medium is-active is-small">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-3 is-bold is-light has-text-centered">Sign up</h1>
+        </div>
+      </div>
+    </div>
+    <div class="pro-wrap">
+      <div class="pro-body-1">
+        <div class="pro-container">
+          <div class="pro-card is-active">
+            <div class="pro-form">
+              <form action="/users/register" method="POST">
+                <div class="field">
+                  <label for="name" class="label">Name</label>
+                  <div class="control">
+                    <input class="input" type="text" id="name" name="username" placeholder="Your name" required>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="email" class="label">E-mail</label>
+                  <div class="control has-icons-left">
+                    <input class="input" type="email" id="email" name="email" placeholder="E-mail address" required>
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-user"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="password" class="label">Password</label>
+                  <div class="control has-icons-left">
+                    <input class="input" type="password" id="password" name="password" placeholder="Password" required>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="password2">Confirm password</label>
+                  <div class="control has-icons-left">
+                    <input class="input" type="password" id="password2" name="password2" placeholder="Password"
+                      required>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button type="submit" class="button is-link">Sign up</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  {{!-- FOOTER --}}
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <i class="fa fa-plane logo_img" aria-hidden="true"></i> FREELY <i class="fa fa-copyright"
+          aria-hidden="true"></i> Jadwiga Legutko SAN 2020
+      </p>
+    </div>
+  </footer>
+  {{!-- END OF FOOTER --}}
+</body>
+
+</html>

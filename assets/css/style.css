@@ -1,13 +1,4 @@
-html, body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
-}
+
 .container {
   flex: 1 0 auto;
 }
@@ -540,7 +531,15 @@ textarea:focus, input:focus{
 
 }
 /* new styless */
-
+html,
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body > footer {
+    margin-top: auto;
+}
 .homepage-hero .layer{
   position: absolute;
   left: 0;
@@ -596,6 +595,35 @@ textarea:focus, input:focus{
 .text-link{
   text-decoration: underline !important;
   font-weight: 600;
+}
+.pro-body{
+  background-color: rgb(79, 170, 167);
+}
+.pro-container{
+  max-width: 840px;
+  margin: 0 auto;
+}
+.pro-card{
+  padding: 30px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  box-shadow: -1px 3px 15px 0 rgba(0,0,0,.06);
+  border-radius: 8px;
+  margin-bottom: 30px;
+  animation: i .5s;
+}
+.pro-form{
+  width: 100%;
+  max-width: 480px;
+  margin: 30px auto;
+}
+.title.is-light{
+  color: #fff;
+}
+.hero-body{
+  
+  padding-bottom: 5rem;
 }
 @media only screen and (max-width: 758px) {
   h4 {
