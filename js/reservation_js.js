@@ -34,6 +34,7 @@ function airplaneAreaLocal(airplane, amount, letters){
                     var seat = document.createElement("input");
                     row.appendChild(seat);
                     seat.classList.add('seat');
+                    seat.classList.add('airplane_area_first');
                     seat.id = k + '_' + i + '_' + j;
                     seat.type = 'button';
                 }
@@ -88,18 +89,18 @@ document.querySelectorAll('.seat').forEach(item => {
     if (seatsTab.includes(item.id)) {
         item.classList.add("item_reserved");
         item.classList.remove("seat");
+        item.classList.remove("airplane_area_first");
     }
 });
 // Pricing connected with inputs
-var lagguagePrice = parseInt(document.getElementById("lagguage_price").textContent);
 var seatsAmount = parseInt(document.getElementById("seats_amount").textContent);
-
 var adultAmount = parseInt(document.getElementById('seatsAmountAdult').value); 
 var kidAmount = parseInt(document.getElementById('seatsAmountKid').value); 
 var babyAmount = parseInt(document.getElementById('seatsAmountBaby').value);
 //suming up the inputs with seats
 var seatSum = 0;
 var lagguage_flag = 0;
+var lagguagePrice = document.getElementById("lagguage_price");
 //eventListener for buttons with lagguage type - lagguage plus
 var lagguagePlus = document.getElementById("lagguage_plus");
 // append lagguage option to order details
@@ -110,7 +111,7 @@ lagguagePlus.addEventListener("click",function(){
     document.getElementById("option_plus").classList.add("choosen_option");
     document.getElementById("option_reg").classList.remove("choosen_option");
     document.getElementById("lagguage_regular").classList.remove("clicked_lagguage");
-    lagguaggeSpan.innerHTML = '<i class="fas fa-suitcase-rolling"></i> Lagguage option: plus';
+    lagguaggeSpan.innerHTML = '<i class="fas fa-suitcase-rolling"></i> Lagguage option: plus + ' + parseInt(lagguagePrice.textContent)+'$';
     lagguage_flag = 1;
  });
 //eventListener for buttons with lagguage type - lagguage regular
@@ -144,17 +145,15 @@ document.getElementById('seatsAmountBaby').addEventListener("change",function(){
 
 
 function myFunction(val) {
-    console.log(val);
-   
     seatSum = parseInt(document.getElementById('seatsAmountAdult').value) + parseInt(document.getElementById('seatsAmountKid').value) 
     + parseInt(document.getElementById('seatsAmountBaby').value);
     // Creating overall of the pricing
-
-    if (seatSum > 9){
-        console.log("nieeeee");
-    }
+    adultPrice = parseInt(document.getElementById("adult_price").textContent) * parseInt(document.getElementById('seatsAmountAdult').value);
+    kidPrice = parseInt(document.getElementById("kid_price").textContent) * parseInt(document.getElementById('seatsAmountKid').value);
+    babyPrice = parseInt(document.getElementById("baby_price").textContent) * parseInt(document.getElementById('seatsAmountBaby').value);
+    overallPrice = adultPrice + kidPrice + babyPrice;
+    document.getElementById("container-price").innerHTML= "Price for tickets: " + adultPrice + "+" + kidPrice + "+" + babyPrice + "+" + "=" + overallPrice + "$";
 }
-
 
 //adding Event listener to each seat and counting how many seats selected, if 9 break
 
@@ -164,10 +163,10 @@ document.querySelectorAll('.seat').forEach(item => {
 
         if (item.classList.contains("seat_booked")) {
             item.classList.remove("seat_booked");
-            item.classList.add("seat_free");
+            item.classList.add("airplane_area_first");
         } else {
             item.classList.add("seat_booked");
-            item.classList.remove("seat_free");
+            item.classList.remove("airplane_area_first");
         }
         //((item.classList.contains("seat_booked")) ? ((item.classList.toggle("seat_free")) && (selectedSeats = selectedSeats - 1)) :
         //((item.classList.toggle("seat_booked") && (selectedSeats = selectedSeats - 1))));
@@ -183,6 +182,7 @@ document.querySelectorAll('.seat').forEach(item => {
     item.addEventListener('click', event => {
         if (selectedSeats.length>=seatSum) {
             item.classList.remove("seat_booked");
+            item.classList.add("airplane_area_first");
         }
     });
 });

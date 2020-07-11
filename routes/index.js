@@ -60,12 +60,19 @@ router.post("/reservation_succed", ensureAuthenticated, (req, res) => {
             console.log(err);
             return;
         } else {
-            res.redirect('/');
+            res.redirect('/reservation_succed');
         }
 
 
     });
 });
+
+//Page reservation_succed
+router.get('/reservation_succed', ensureAuthenticated, (req, res) =>
+  res.render('reservation_succed', {
+    user: req.user
+  })
+);
 
 // Page for logged in
 router.get('/index_logged', ensureAuthenticated, (req, res) =>
